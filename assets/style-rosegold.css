@@ -1,0 +1,195 @@
+/* 為你譜 Weinipu — 玫瑰燙金試作
+   只用在 index-rosegold.html，不改原本的 style.css。
+   先給實色玫瑰金當後備；支援 background-clip:text 時再套金屬漸層。
+   最淺的光澤仍保持比背景深，避免標題右半看起來像褪色。
+*/
+
+.theme-rosegold {
+  --foil-solid: #9e5a63;
+  --foil-gradient: linear-gradient(
+    115deg,
+    #9e5a63 0%,
+    #b76e79 18%,
+    #c98986 32%,
+    #e0b09a 42%,
+    #e8b4a0 50%,
+    #d4928c 62%,
+    #b76e79 78%,
+    #9e5a63 100%
+  );
+}
+
+/* 實色後備：不支援 clip 時仍是可讀的玫瑰金 */
+.theme-rosegold h1,
+.theme-rosegold h2,
+.theme-rosegold h3,
+.theme-rosegold .plan-price,
+.theme-rosegold .plan-price span,
+.theme-rosegold .step-num,
+.theme-rosegold .faq-item summary,
+.theme-rosegold .price-note {
+  color: var(--foil-solid);
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .theme-rosegold h1,
+  .theme-rosegold h2,
+  .theme-rosegold h3,
+  .theme-rosegold .plan-price,
+  .theme-rosegold .plan-price span,
+  .theme-rosegold .step-num,
+  .theme-rosegold .faq-item summary,
+  .theme-rosegold .price-note {
+    background-image: var(--foil-gradient);
+    /* 以字寬循環，長標題才不會左深右淺、右半消失 */
+    background-size: 7.5em 100%;
+    background-position: 0 50%;
+    background-repeat: repeat-x;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    filter: drop-shadow(0 1px 0 rgba(110, 52, 60, 0.22));
+  }
+
+  /* 桌面：緩慢移動的光澤。手機與「減少動態」只保留靜態燙金 */
+  @media (min-width: 720px) and (prefers-reduced-motion: no-preference) {
+    .theme-rosegold h1,
+    .theme-rosegold h2,
+    .theme-rosegold h3,
+    .theme-rosegold .plan-price,
+    .theme-rosegold .plan-price span,
+    .theme-rosegold .step-num,
+    .theme-rosegold .faq-item summary,
+    .theme-rosegold .price-note {
+      animation: foil-shine 10s ease-in-out infinite alternate;
+    }
+  }
+}
+
+@keyframes foil-shine {
+  0% { background-position: 0 50%; }
+  100% { background-position: 7.5em 50%; }
+}
+
+.theme-rosegold .footer-en {
+  color: #9e5a63;
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .theme-rosegold .footer-en {
+    background-image: linear-gradient(115deg, #9e5a63 0%, #b76e79 35%, #e8b4a0 52%, #b76e79 100%);
+    background-size: 8em 100%;
+    background-position: 0 50%;
+    background-repeat: repeat-x;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+/* 正文、導覽、按鈕維持高對比，不套燙金 */
+.theme-rosegold p,
+.theme-rosegold li,
+.theme-rosegold .hero-lead,
+.theme-rosegold .sample-story,
+.theme-rosegold .nav a,
+.theme-rosegold .btn,
+.theme-rosegold .chip,
+.theme-rosegold .plan li,
+.theme-rosegold .faq-item p,
+.theme-rosegold .footer-privacy,
+.theme-rosegold .pay-note,
+.theme-rosegold .promises,
+.theme-rosegold .sample-lyric,
+.theme-rosegold .chorus p {
+  -webkit-text-fill-color: unset;
+  filter: none;
+}
+
+.theme-rosegold .btn-primary {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+}
+
+.theme-rosegold .btn-ghost,
+.theme-rosegold .btn-listen {
+  color: var(--rose-deep);
+  -webkit-text-fill-color: var(--rose-deep);
+}
+
+.theme-rosegold .plan-badge {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  background: linear-gradient(135deg, #9e5a63, #b76e79 45%, #c9848a);
+  filter: none;
+}
+
+
+/* 品牌名「為你譜」：深酒紅實色，與周圍玫瑰燙金明確區隔 */
+.theme-rosegold {
+  --brand-ink: #7a2e3a;
+}
+
+.theme-rosegold .wnp,
+.theme-rosegold .footer-name,
+.theme-rosegold .footer-name .wnp,
+.theme-rosegold h1 .wnp,
+.theme-rosegold h2 .wnp,
+.theme-rosegold h3 .wnp,
+.theme-rosegold p .wnp,
+.theme-rosegold .hero-lead .wnp,
+.theme-rosegold .chorus .wnp,
+.theme-rosegold .chorus cite .wnp,
+.theme-rosegold .sample-lyric .wnp,
+.theme-rosegold .sample-story .wnp,
+.theme-rosegold .faq-item .wnp,
+.theme-rosegold .footer-copy .wnp,
+.theme-rosegold .price-note .wnp {
+  font-family: "LXGW WenKai TC", "Noto Serif TC", serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--brand-ink);
+  -webkit-text-fill-color: var(--brand-ink);
+  background: none;
+  background-image: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  filter: none;
+  animation: none;
+  /* 字重已是 700；細描邊讓筆畫比周圍燙金標題略為飽滿 */
+  -webkit-text-stroke: 0.3px var(--brand-ink);
+}
+
+.theme-rosegold .wnp {
+  display: inline-block;
+  font-size: 1.08em;
+}
+
+
+/* 頁首 logo 與主視覺 logo 維持原樣，不套燙金或酒紅 */
+.theme-rosegold .brand .brand-name {
+  color: var(--rose);
+  -webkit-text-fill-color: var(--rose);
+  background: none;
+  background-image: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  filter: none;
+  animation: none;
+  -webkit-text-stroke: 0;
+}
+
+.theme-rosegold .brand .brand-en,
+.theme-rosegold .eyebrow {
+  color: var(--gold-deep);
+  -webkit-text-fill-color: var(--gold-deep);
+  background: none;
+  background-image: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  filter: none;
+  animation: none;
+  -webkit-text-stroke: 0;
+}
