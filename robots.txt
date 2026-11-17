@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://want5513-boop.github.io/weinipu/sitemap.xml
