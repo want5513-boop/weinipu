@@ -124,3 +124,132 @@ players.forEach((player) => {
     });
   });
 });
+
+/* 網站背景音樂：第一次互動後播放副歌循環，右下角按鈕可靜音並記住選擇。 */
+(function initSiteBgm() {
+  const audio = document.getElementById("site-bgm");
+  const btn = document.getElementById("bgm-toggle");
+  if (!audio || !btn) return;
+
+  const STORAGE_KEY = "weinipu-bgm";
+  const TARGET_VOL = 0.5;
+  const FADE_MS = 1500;
+  const GESTURES = ["pointerdown", "touchstart", "scroll", "keydown"];
+
+  let fadeFrame = 0;
+  let started = false;
+  let starting = false;
+  let userOff = false;
+
+  try {
+    userOff = localStorage.getItem(STORAGE_KEY) === "off";
+  } catch (err) {
+    userOff = false;
+  }
+
+  function remember(off) {
+    userOff = off;
+    try {
+      localStorage.setItem(STORAGE_KEY, off ? "off" : "on");
+    } catch (err) {
+      /* private mode */
+    }
+  }
+
+  function setUi(playing) {
+    btn.classList.toggle("is-playing", playing);
+    btn.setAttribute("aria-pressed", playing ? "true" : "false");
+    btn.setAttribute("aria-label", playing ? "關閉背景音樂" : "開啟背景音樂");
+  }
+
+  function fadeTo(target, ms) {
+    if (fadeFrame) cancelAnimationFrame(fadeFrame);
+    const from = audio.volume;
+    const t0 = performance.now();
+    const token = {};
+    fadeFrame = token;
+    function step(now) {
+      if (fadeFrame !== token) return;
+      const p = Math.min(1, Math.max(0, (now - t0) / ms));
+      const eased = 1 - (1 - p) * (1 - p);
+      const next = from + (target - from) * eased;
+      audio.volume = Math.min(1, Math.max(0, next));
+      if (p < 1) requestAnimationFrame(step);
+      else fadeFrame = 0;
+    }
+    requestAnimationFrame(step);
+  }
+
+  function startPlayback() {
+    if (userOff || started || starting) return Promise.resolve();
+    starting = true;
+    audio.muted = false;
+    audio.volume = 0;
+    const play = audio.play();
+    const onStart = () => {
+      starting = false;
+      started = true;
+      fadeTo(TARGET_VOL, FADE_MS);
+      setUi(true);
+    };
+    const onFail = (err) => {
+      starting = false;
+      throw err;
+    };
+    if (play && typeof play.then === "function") {
+      return play.then(onStart, onFail);
+    }
+    onStart();
+    return Promise.resolve();
+  }
+
+  function stopPlayback() {
+    fadeFrame = 0;
+    starting = false;
+    audio.pause();
+    started = false;
+    setUi(false);
+  }
+
+  function onFirstGesture(event) {
+    if (userOff || started) return;
+    if (event && btn.contains(event.target)) return;
+    startPlayback().catch(() => {});
+  }
+
+  function armGestures() {
+    const onOnce = (event) => {
+      GESTURES.forEach((name) => {
+        window.removeEventListener(name, onOnce, true);
+      });
+      onFirstGesture(event);
+    };
+    GESTURES.forEach((name) => {
+      window.addEventListener(name, onOnce, { capture: true, passive: true });
+    });
+  }
+
+  btn.addEventListener("click", (event) => {
+    event.stopPropagation();
+    if (started && !audio.paused) {
+      remember(true);
+      stopPlayback();
+      return;
+    }
+    remember(false);
+    started = false;
+    startPlayback().catch(() => {});
+  });
+
+  setUi(false);
+
+  if (userOff) {
+    return;
+  }
+
+  const autoplay = startPlayback();
+  if (autoplay && typeof autoplay.catch === "function") {
+    autoplay.catch(() => {});
+  }
+  armGestures();
+})();
