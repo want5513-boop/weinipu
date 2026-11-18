@@ -1231,3 +1231,304 @@ section { padding: 72px 0; }
   .chip { transition: none; }
   .chip-note-card.is-in { animation: none; }
 }
+
+
+/* ==================================================
+   Relayout 2026-11-18：手機優先的排版整理
+   節奏一致的區塊間距、交錯底色、卡片對齊、步驟時間軸
+   ================================================== */
+
+:root {
+  --section-y: 64px;
+  --head-gap: 36px;
+  --bg-blush: #F7E7E2;
+  --gold-line: rgba(196, 160, 122, 0.42);
+}
+
+section { padding: var(--section-y) 0; }
+.hero { padding-bottom: 56px; }
+
+/* 交錯底色：奶油 → 暖杏 → 奶油 → 玫瑰 → 奶油 → 暖杏 → 收尾 */
+.occasions { background: var(--bg-warm); }
+.samples { background: var(--bg); }
+.plans { background: linear-gradient(180deg, var(--bg-blush) 0%, #F9EDE8 100%); }
+.faq { background: var(--bg); }
+.process { background: var(--bg-warm); }
+.closing {
+  padding: 72px 0 80px;
+  background:
+    radial-gradient(640px 260px at 50% 0%, rgba(255, 255, 255, 0.55) 0%, transparent 70%),
+    linear-gradient(180deg, #F3DCD6 0%, #EFD3CD 100%);
+  border-top: 1px solid var(--gold-line);
+}
+
+/* 區塊標題 */
+.section-head { margin-bottom: var(--head-gap); }
+.section-head h2 { margin-bottom: 4px; }
+.section-head .flourish { margin: 8px 0 14px; }
+.section-head p {
+  max-width: 32em;
+  font-size: 0.98rem;
+  line-height: 1.9;
+  text-wrap: pretty;
+}
+
+/* 場合按鈕：手機 3×3 整齊格線 */
+.chips {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 520px;
+}
+.chip {
+  min-height: 46px;
+  padding: 0.45rem 0.4rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 2px 8px rgba(90, 46, 52, 0.04);
+}
+.chip:active { transform: scale(0.98); }
+.chip-note {
+  max-width: 520px;
+  margin-top: 18px;
+}
+.chip-note-card {
+  border-color: var(--gold-line);
+  padding: 22px 22px 20px;
+  box-shadow: 0 14px 34px rgba(90, 46, 52, 0.09);
+}
+.chip-note-card::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(196, 160, 122, 0.22);
+  border-radius: calc(var(--radius) - 6px);
+  pointer-events: none;
+}
+.chip-note-cta { position: relative; z-index: 1; }
+
+/* 試聽卡片 */
+.samples-grid {
+  gap: 20px;
+  max-width: 980px;
+  margin-inline: auto;
+}
+.sample {
+  padding: 22px 20px 16px;
+  gap: 16px;
+  box-shadow: 0 10px 28px rgba(90, 46, 52, 0.06);
+}
+.sample-main { gap: 12px; }
+.sample-top { gap: 6px; }
+.sample-tag {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 1px 10px;
+  line-height: 1.8;
+}
+.sample h3 { font-size: 1.32rem; line-height: 1.45; }
+.sample-story { line-height: 1.85; }
+.player { margin-top: 2px; }
+.sample-concept {
+  position: relative;
+  padding: 16px 18px 16px 20px;
+  background: linear-gradient(180deg, #F8EEE8 0%, var(--bg-warm) 100%);
+}
+.sample-concept::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18px;
+  bottom: 18px;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+.sample-lyrics { padding-top: 6px; }
+.sample-lyrics summary { min-height: 40px; }
+
+/* 方案 */
+.price-note {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: -12px auto 28px;
+  padding: 6px 16px;
+  border: 1px solid var(--gold-line);
+  border-radius: 18px;
+  background: rgba(255, 252, 250, 0.75);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  text-align: center;
+  text-wrap: balance;
+}
+.plans-grid {
+  max-width: 880px;
+  margin-inline: auto;
+  gap: 18px;
+}
+.plan {
+  padding: 28px 24px 24px;
+  box-shadow: 0 14px 36px rgba(90, 46, 52, 0.07);
+}
+.plan-featured {
+  padding-top: 28px;
+  border: 1.5px solid rgba(183, 110, 121, 0.45);
+  box-shadow: 0 18px 44px rgba(142, 62, 70, 0.13);
+  background:
+    linear-gradient(180deg, #FFFDFB 0%, #FFF8F5 100%);
+}
+.plan-badge { top: 22px; right: 20px; }
+.plan-name { margin-bottom: 2px; }
+.plan-price { line-height: 1.3; }
+.plan ul { margin: 16px 0 22px; }
+.plan li { padding: 9px 0 9px 22px; font-size: 0.97rem; line-height: 1.7; }
+.plan li::before { top: calc(9px + 0.62em); width: 7px; height: 7px; }
+.plan .btn { width: 100%; }
+
+/* 歌詞卡比較圖（原本的行內樣式移到這裡） */
+.lyric-compare {
+  margin: 32px auto 0;
+  max-width: 460px;
+  padding: 12px 12px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--gold-line);
+  border-radius: 22px;
+  box-shadow: 0 14px 36px rgba(90, 46, 52, 0.08);
+  text-align: center;
+}
+.lyric-compare img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  background: #FBF4EF;
+}
+.lyric-compare figcaption {
+  margin-top: 12px;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+}
+.pay-note { margin-top: 24px; font-size: 0.92rem; }
+
+/* 常見問題 */
+.faq-list { width: min(760px, 100%); gap: 10px; }
+.faq-item { box-shadow: 0 4px 14px rgba(90, 46, 52, 0.035); }
+.faq-item summary { min-height: 56px; display: flex; align-items: center; line-height: 1.55; }
+.faq-item p { line-height: 1.85; font-size: 0.97rem; }
+
+/* 訂歌流程：時間軸 */
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  max-width: 760px;
+  margin-inline: auto;
+  position: relative;
+}
+.steps::before {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 28px;
+  bottom: 28px;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--gold-line) 8%, var(--gold-line) 92%, transparent);
+}
+.step {
+  position: relative;
+  padding: 18px 20px 18px 20px;
+  margin-left: 52px;
+  box-shadow: 0 8px 22px rgba(90, 46, 52, 0.05);
+}
+.step::before {
+  content: "";
+  position: absolute;
+  left: -52px;
+  top: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--gold-line);
+  box-shadow: 0 4px 12px rgba(90, 46, 52, 0.08);
+}
+.step-num {
+  position: absolute;
+  left: -52px;
+  top: 16px;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.step h3 { font-size: 1.12rem; margin-bottom: 6px; line-height: 1.5; }
+.step p { font-size: 0.95rem; line-height: 1.85; }
+
+/* 收尾 */
+.closing h2 { margin-bottom: 12px; }
+.closing p { margin-bottom: 26px; text-wrap: balance; }
+
+/* 手機：底部訂歌列與喇叭不再蓋住內容 */
+@media (max-width: 719px) {
+  :root { --sticky-cta-h: 73px; }
+  .sticky-cta {
+    padding: 10px 74px calc(10px + env(safe-area-inset-bottom, 0px)) 16px;
+  }
+  .sticky-cta .btn {
+    height: 52px;
+    padding: 0 1rem;
+  }
+  .bgm-toggle {
+    right: 16px;
+    bottom: calc(13px + env(safe-area-inset-bottom, 0px));
+  }
+  .site-footer { padding-bottom: 32px; }
+  .chip-note { scroll-margin-bottom: calc(var(--sticky-cta-h) + 16px); }
+}
+
+@media (max-width: 359px) {
+  .chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* 平板以上 */
+@media (min-width: 720px) {
+  :root { --section-y: 88px; --head-gap: 44px; }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 720px;
+  }
+  .chip { padding: 0.5rem 1.2rem; }
+  .plans-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .plan { padding: 32px 30px 28px; }
+  .plan-featured { transform: translateY(-6px); }
+  .steps { grid-template-columns: 1fr; }
+  .step { padding: 22px 26px; margin-left: 64px; }
+  .steps::before { left: 24px; }
+  .step::before, .step-num { left: -64px; width: 48px; height: 48px; top: 18px; }
+  .step-num { font-size: 0.95rem; }
+}
+
+@media (min-width: 960px) {
+  :root { --section-y: 104px; --head-gap: 52px; }
+  section { padding: var(--section-y) 0; }
+  .hero { padding: 28px 0 88px; }
+  .closing { padding: 96px 0 104px; }
+  .sample { padding: 28px 28px 18px; }
+  .lyric-compare { margin-top: 44px; max-width: 420px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip:active { transform: none; }
+  .plan-featured { transform: none; }
+}

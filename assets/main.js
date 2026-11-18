@@ -5,6 +5,67 @@ document.querySelectorAll(".js-order-link").forEach((link) => {
   link.href = ORDER_URL;
 });
 
+/* 場合選項：點選後顯示一句應景的話，並可前往方案區下單。
+   放在最前面、用事件委派綁在 document 上，即使頁面其他區塊或腳本有狀況，也不會讓按鈕失效。 */
+(function initOccasionChips() {
+  function stickyOffset() {
+    const bar = document.querySelector(".sticky-cta");
+    if (!bar) return 0;
+    const cs = window.getComputedStyle(bar);
+    if (cs.display === "none" || cs.position !== "fixed") return 0;
+    return bar.getBoundingClientRect().height;
+  }
+
+  function revealNote(note) {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.requestAnimationFrame(() => {
+      const rect = note.getBoundingClientRect();
+      const header = document.querySelector(".site-header");
+      const topLimit = (header ? header.getBoundingClientRect().height : 0) + 12;
+      const bottomLimit = window.innerHeight - stickyOffset() - 16;
+      let delta = 0;
+      if (rect.bottom > bottomLimit) delta = rect.bottom - bottomLimit;
+      if (rect.top - delta < topLimit) delta = rect.top - topLimit;
+      if (Math.abs(delta) > 1) {
+        window.scrollBy({ top: delta, behavior: reduce ? "auto" : "smooth" });
+      }
+    });
+  }
+
+  function showLine(chip) {
+    const root = chip.closest(".occasions") || document;
+    const note = root.querySelector(".chip-note");
+    const textEl = root.querySelector(".chip-note-text");
+    const card = root.querySelector(".chip-note-card");
+    const line = (chip.getAttribute("data-line") || "").trim();
+    if (!note || !textEl || !line) return;
+
+    root.querySelectorAll(".chip").forEach((other) => {
+      const on = other === chip;
+      other.classList.toggle("is-active", on);
+      other.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+
+    textEl.textContent = line;
+    note.hidden = false;
+    note.removeAttribute("hidden");
+
+    if (card) {
+      card.classList.remove("is-in");
+      void card.offsetWidth;
+      card.classList.add("is-in");
+    }
+    revealNote(note);
+  }
+
+  document.addEventListener("click", (event) => {
+    const chip = event.target && event.target.closest ? event.target.closest(".chip[data-line]") : null;
+    if (!chip) return;
+    if (chip.tagName === "A") event.preventDefault();
+    showLine(chip);
+  });
+})();
+
 /* 手機選單 */
 const header = document.querySelector(".site-header");
 const toggle = document.querySelector(".nav-toggle");
@@ -286,41 +347,4 @@ players.forEach((player) => {
     autoplay.catch(() => {});
   }
   armGestures();
-})();
-
-/* 場合選項：點選後顯示一句應景的話，並可前往方案區下單。 */
-(function initOccasionChips() {
-  const root = document.querySelector(".occasions");
-  if (!root) return;
-
-  const chips = [...root.querySelectorAll(".chip")];
-  const note = root.querySelector(".chip-note");
-  const textEl = root.querySelector(".chip-note-text");
-  const card = root.querySelector(".chip-note-card");
-  if (!chips.length || !note || !textEl) return;
-
-  chips.forEach((chip) => {
-    chip.addEventListener("click", () => {
-      const line = (chip.getAttribute("data-line") || "").trim();
-      if (!line) return;
-
-      chips.forEach((other) => {
-        const on = other === chip;
-        other.classList.toggle("is-active", on);
-        other.setAttribute("aria-pressed", on ? "true" : "false");
-      });
-
-      textEl.textContent = line;
-      note.hidden = false;
-
-      if (card) {
-        card.classList.remove("is-in");
-        void card.offsetWidth;
-        card.classList.add("is-in");
-      }
-
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      note.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" });
-    });
-  });
 })();
