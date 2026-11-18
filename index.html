@@ -434,6 +434,21 @@
     <a class="btn btn-primary js-order-link" href="https://lin.ee/XaCESBb" target="_blank" rel="noopener noreferrer">我要訂一首歌</a>
   </div>
 
+  <audio id="site-bgm" loop preload="none">
+    <source src="assets/theme-chorus.mp3" type="audio/mpeg">
+  </audio>
+  <button type="button" class="bgm-toggle" id="bgm-toggle" aria-label="開啟背景音樂" aria-pressed="false">
+    <svg class="icon-on" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M4 9.5v5h3.2L12 18.5V5.5L7.2 9.5H4z"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M15.2 8.8a4.2 4.2 0 0 1 0 6.4"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M17.6 6.4a7.4 7.4 0 0 1 0 11.2"/>
+    </svg>
+    <svg class="icon-off" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path fill="currentColor" d="M4 9.5v5h3.2L12 18.5V5.5L7.2 9.5H4z"/>
+      <path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" d="M16.2 9.2l4.6 4.6M20.8 9.2l-4.6 4.6"/>
+    </svg>
+  </button>
+
   <script src="assets/main.js"></script>
 </body>
 </html>
