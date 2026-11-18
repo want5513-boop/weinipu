@@ -32,9 +32,8 @@ if (toggle && nav) {
 }
 
 /* 作品試聽播放器
-   音檔尚未上架時，按鈕維持停用，並顯示「試聽準備中」。
-   待正式可公開授權的 MP3 備妥後，在對應 <audio> 放入 <source>，
-   或在 .player 上設定 data-audio="assets/audio/檔名.mp3"。 */
+   同時只播放一首。開始播放時會暫停網站背景音樂，結束後不自動恢復；
+   若要再聽背景音樂，請按右下角喇叭。音檔尚未上架時，按鈕維持停用。 */
 const players = [...document.querySelectorAll(".player")];
 let current = null;
 
@@ -56,6 +55,13 @@ function pauseCurrent() {
     btn.setAttribute("aria-label", `播放《${title}》`);
   }
 }
+
+function pauseAllSamples() {
+  pauseCurrent();
+  current = null;
+}
+
+document.addEventListener("weinipu:bgmplay", pauseAllSamples);
 
 players.forEach((player) => {
   const audio = player.querySelector("audio");
@@ -107,6 +113,14 @@ players.forEach((player) => {
     });
   }
 
+  const bar = player.querySelector(".player-bar");
+  bar?.addEventListener("click", (event) => {
+    if (!audio || !Number.isFinite(audio.duration) || audio.duration <= 0) return;
+    const rect = bar.getBoundingClientRect();
+    const ratio = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+    audio.currentTime = ratio * audio.duration;
+  });
+
   btn?.addEventListener("click", () => {
     if (!audio) return;
     if (player.classList.contains("is-playing")) {
@@ -115,10 +129,12 @@ players.forEach((player) => {
       return;
     }
     if (current && current !== player) pauseCurrent();
+    document.dispatchEvent(new CustomEvent("weinipu:sampleplay"));
     audio.play().then(() => {
       player.classList.add("is-playing");
       btn.setAttribute("aria-label", `暫停《${title}》`);
       current = player;
+      if (status) status.textContent = "";
     }).catch(() => {
       if (status) status.textContent = "暫時無法播放";
     });
@@ -140,6 +156,7 @@ players.forEach((player) => {
   let started = false;
   let starting = false;
   let userOff = false;
+  let holdOff = false;
 
   try {
     userOff = localStorage.getItem(STORAGE_KEY) === "off";
@@ -181,7 +198,7 @@ players.forEach((player) => {
   }
 
   function startPlayback() {
-    if (userOff || started || starting) return Promise.resolve();
+    if (userOff || started || starting || holdOff) return Promise.resolve();
     starting = true;
     audio.muted = false;
     audio.volume = 0;
@@ -212,8 +229,10 @@ players.forEach((player) => {
   }
 
   function onFirstGesture(event) {
-    if (userOff || started) return;
+    if (userOff || started || holdOff) return;
     if (event && btn.contains(event.target)) return;
+    const target = event && event.target;
+    if (target && target.closest && target.closest(".player, .sample-lyrics, .play-btn")) return;
     startPlayback().catch(() => {});
   }
 
@@ -229,15 +248,30 @@ players.forEach((player) => {
     });
   }
 
+  function duckForSample() {
+    holdOff = true;
+    if (fadeFrame) cancelAnimationFrame(fadeFrame);
+    fadeFrame = 0;
+    starting = false;
+    audio.pause();
+    started = false;
+    setUi(false);
+  }
+
+  document.addEventListener("weinipu:sampleplay", duckForSample);
+
   btn.addEventListener("click", (event) => {
     event.stopPropagation();
     if (started && !audio.paused) {
       remember(true);
+      holdOff = false;
       stopPlayback();
       return;
     }
     remember(false);
+    holdOff = false;
     started = false;
+    document.dispatchEvent(new CustomEvent("weinipu:bgmplay"));
     startPlayback().catch(() => {});
   });
 
