@@ -393,19 +393,109 @@ section { padding: 72px 0; }
 .chip {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding: 0.55rem 1.05rem;
   border-radius: 999px;
   background: #fff;
   border: 1px solid var(--line);
   color: var(--ink);
   text-decoration: none;
+  font-family: inherit;
   font-size: 0.95rem;
   letter-spacing: 0.04em;
+  line-height: 1.4;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .chip:hover {
   border-color: var(--rose-soft);
   color: var(--rose-deep);
+}
+
+.chip.is-active {
+  background: var(--bg-rose);
+  border-color: var(--rose-soft);
+  color: var(--rose-deep);
+  box-shadow: 0 4px 14px rgba(142, 62, 70, 0.12);
+}
+
+.chip-note {
+  max-width: 32em;
+  margin: 20px auto 0;
+  scroll-margin-bottom: calc(var(--sticky-cta-h) + 20px);
+}
+
+.chip-note[hidden] {
+  display: none;
+}
+
+.chip-note-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid rgba(196, 160, 122, 0.42);
+  border-radius: var(--radius);
+  padding: 22px 24px 20px;
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.chip-note-card.is-in {
+  animation: chip-note-in 0.4s ease;
+}
+
+.chip-note-card::before {
+  content: "♪";
+  display: block;
+  font-family: var(--font-serif);
+  color: var(--gold);
+  font-size: 0.95rem;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.chip-note-text {
+  margin: 0 0 14px;
+  font-family: var(--font-serif);
+  color: var(--ink);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  letter-spacing: 0.04em;
+  text-wrap: pretty;
+}
+
+.chip-note-cta {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  color: var(--rose-deep);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rose-soft);
+  padding-bottom: 1px;
+}
+
+.chip-note-cta:hover {
+  color: var(--rose);
+  border-bottom-color: var(--rose);
+}
+
+.chip-note-cta:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 3px;
+}
+
+@keyframes chip-note-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Samples
@@ -1138,4 +1228,6 @@ section { padding: 72px 0; }
 @media (prefers-reduced-motion: reduce) {
   .bgm-toggle.is-playing { animation: none; }
   .bgm-toggle { transition: none; }
+  .chip { transition: none; }
+  .chip-note-card.is-in { animation: none; }
 }

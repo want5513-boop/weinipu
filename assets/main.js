@@ -287,3 +287,40 @@ players.forEach((player) => {
   }
   armGestures();
 })();
+
+/* 場合選項：點選後顯示一句應景的話，並可前往方案區下單。 */
+(function initOccasionChips() {
+  const root = document.querySelector(".occasions");
+  if (!root) return;
+
+  const chips = [...root.querySelectorAll(".chip")];
+  const note = root.querySelector(".chip-note");
+  const textEl = root.querySelector(".chip-note-text");
+  const card = root.querySelector(".chip-note-card");
+  if (!chips.length || !note || !textEl) return;
+
+  chips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+      const line = (chip.getAttribute("data-line") || "").trim();
+      if (!line) return;
+
+      chips.forEach((other) => {
+        const on = other === chip;
+        other.classList.toggle("is-active", on);
+        other.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+
+      textEl.textContent = line;
+      note.hidden = false;
+
+      if (card) {
+        card.classList.remove("is-in");
+        void card.offsetWidth;
+        card.classList.add("is-in");
+      }
+
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      note.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "nearest" });
+    });
+  });
+})();

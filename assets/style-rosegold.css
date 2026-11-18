@@ -97,6 +97,7 @@
 .theme-rosegold .nav a,
 .theme-rosegold .btn,
 .theme-rosegold .chip,
+.theme-rosegold .chip-note-cta,
 .theme-rosegold .plan li,
 .theme-rosegold .faq-item p,
 .theme-rosegold .footer-privacy,
@@ -114,7 +115,8 @@
 }
 
 .theme-rosegold .btn-ghost,
-.theme-rosegold .btn-listen {
+.theme-rosegold .btn-listen,
+.theme-rosegold .chip-note-cta {
   color: var(--rose-deep);
   -webkit-text-fill-color: var(--rose-deep);
 }
