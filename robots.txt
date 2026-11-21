@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
+# 注意：github.io 專案網站的 robots.txt 只有放在網域根目錄才有效；此檔在 /weinipu/ 下搜尋引擎不會讀取，
+# 僅供日後換自有網域時使用（屆時把下一行改成新網址）。
 Sitemap: https://want5513-boop.github.io/weinipu/sitemap.xml
