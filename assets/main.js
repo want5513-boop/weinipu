@@ -348,3 +348,30 @@ players.forEach((player) => {
   }
   armGestures();
 })();
+
+/* 歌詞範例放大 */
+(function () {
+  var thumbs = document.querySelectorAll(".lyric-thumb");
+  if (!thumbs.length) return;
+  var box = document.createElement("div");
+  box.className = "lyric-lightbox";
+  box.setAttribute("role", "dialog");
+  box.setAttribute("aria-modal", "true");
+  box.setAttribute("aria-label", "歌詞範例放大圖");
+  box.innerHTML = '<button type="button" class="lyric-lightbox-close" aria-label="關閉">\u00d7</button><img alt="">';
+  document.body.appendChild(box);
+  var img = box.querySelector("img");
+  var last = null;
+  function close() { box.classList.remove("is-open"); img.removeAttribute("src"); if (last) last.focus(); }
+  Array.prototype.forEach.call(thumbs, function (t) {
+    t.addEventListener("click", function () {
+      last = t;
+      img.src = t.getAttribute("data-full");
+      img.alt = (t.querySelector("img") || {}).alt || "";
+      box.classList.add("is-open");
+      box.querySelector("button").focus();
+    });
+  });
+  box.addEventListener("click", function (e) { if (e.target !== img) close(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && box.classList.contains("is-open")) close(); });
+})();

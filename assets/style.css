@@ -1389,30 +1389,6 @@ section { padding: var(--section-y) 0; }
 .plan li::before { top: calc(9px + 0.62em); width: 7px; height: 7px; }
 .plan .btn { width: 100%; }
 
-/* 歌詞卡比較圖（原本的行內樣式移到這裡） */
-.lyric-compare {
-  margin: 32px auto 0;
-  max-width: 460px;
-  padding: 12px 12px 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--gold-line);
-  border-radius: 22px;
-  box-shadow: 0 14px 36px rgba(90, 46, 52, 0.08);
-  text-align: center;
-}
-.lyric-compare img {
-  width: 100%;
-  height: auto;
-  border-radius: 14px;
-  background: #FBF4EF;
-}
-.lyric-compare figcaption {
-  margin-top: 12px;
-  font-size: 0.86rem;
-  line-height: 1.6;
-  letter-spacing: 0.04em;
-  color: var(--ink-faint);
-}
 .pay-note { margin-top: 24px; font-size: 0.92rem; }
 
 /* 常見問題 */
@@ -1525,10 +1501,25 @@ section { padding: var(--section-y) 0; }
   .hero { padding: 28px 0 88px; }
   .closing { padding: 96px 0 104px; }
   .sample { padding: 28px 28px 18px; }
-  .lyric-compare { margin-top: 44px; max-width: 420px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .chip:active { transform: none; }
   .plan-featured { transform: none; }
 }
+
+/* 方案卡內的歌詞檔範例 */
+.plan-sample { margin: 0 0 20px; padding: 12px 12px 10px; border-radius: 16px; background: #FBF7F3; border: 1px dashed rgba(90,46,52,0.22); text-align: center; }
+.plan-sample-title { margin: 0 0 10px; font-size: 0.9rem; letter-spacing: 0.08em; color: var(--ink-soft, #6b4a4e); }
+.plan-sample-thumbs { display: flex; justify-content: center; gap: 10px; }
+.lyric-thumb { appearance: none; -webkit-appearance: none; padding: 0; margin: 0; border: 1px solid rgba(90,46,52,0.18); border-radius: 8px; background: #fff; overflow: hidden; cursor: zoom-in; width: 46%; max-width: 150px; box-shadow: 0 4px 12px rgba(90,46,52,0.10); -webkit-tap-highlight-color: transparent; }
+.plan-sample-basic .lyric-thumb { width: 62%; max-width: 200px; }
+.lyric-thumb img { display: block; width: 100%; height: auto; }
+.plan-sample-premium { background: linear-gradient(160deg, #FFF8F3, #F9E7E4); border: 1px solid #D9AFA0; box-shadow: 0 6px 18px rgba(184,116,104,0.18); }
+.plan-sample-premium .plan-sample-title { color: #A5594F; font-weight: 600; }
+.plan-sample-premium .lyric-thumb { border: 1.5px solid #D9AFA0; box-shadow: 0 6px 16px rgba(184,116,104,0.28); }
+.plan-sample-cap { margin: 10px 0 0; font-size: 0.78rem; line-height: 1.6; color: var(--ink-faint, #8a7073); }
+.lyric-lightbox { position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center; padding: 16px; background: rgba(40,20,24,0.82); }
+.lyric-lightbox.is-open { display: flex; }
+.lyric-lightbox img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 10px; background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+.lyric-lightbox-close { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,0.92); color: #5A2E34; font-size: 26px; line-height: 44px; padding: 0; cursor: pointer; }
