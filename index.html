@@ -28,9 +28,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Sans+TC:wght@400;500&family=Noto+Serif+TC:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=20261121a">
+  <link rel="stylesheet" href="assets/style.css?v=20261126e">
   <!-- 玫瑰燙金試作稿：僅此檔使用，不影響 index.html -->
-  <link rel="stylesheet" href="assets/style-rosegold.css?v=20261121a">
+  <link rel="stylesheet" href="assets/style-rosegold.css?v=20261126e">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -78,17 +78,19 @@
         "makesOffer": [
           {
             "@type": "Offer",
+            "name": "入門款客製化歌曲",
+            "url": "https://want5513-boop.github.io/weinipu/#plans",
+            "availability": "https://schema.org/InStock"
+          },
+          {
+            "@type": "Offer",
             "name": "心意款客製化歌曲",
-            "price": "990",
-            "priceCurrency": "TWD",
             "url": "https://want5513-boop.github.io/weinipu/#plans",
             "availability": "https://schema.org/InStock"
           },
           {
             "@type": "Offer",
             "name": "紀念款客製化歌曲",
-            "price": "1690",
-            "priceCurrency": "TWD",
             "url": "https://want5513-boop.github.io/weinipu/#plans",
             "availability": "https://schema.org/InStock"
           }
@@ -128,7 +130,7 @@
             "name": "會收到什麼？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "完成後會在 LINE 收到歌曲音檔（MP3）、歌詞檔，以及字幕影片（MP4）。心意款為一個版本，男聲或女聲由你選，影片不含照片；紀念款可把最多 10 張照片放進字幕影片，另外附伴奏版音檔和電子歌詞卡，並送上男聲、女聲兩個版本。你不必另外下載其他軟體。"
+              "text": "依方案而定，全部都直接傳到你的 LINE。入門款會收到一個版本的歌曲音檔（MP3，男聲或女聲由你選）、歌詞檔和專屬禮物卡，不含影片。心意款再加上可放入最多 10 張照片的字幕影片（MP4）和精美電子歌詞卡。紀念款再加上男聲、女聲兩個版本、伴奏版音檔、一支手繪風格 MV，以及一個專屬歌曲頁面：一條網址，在 LINE 就能直接打開，有拆禮物的封面、歌詞跟著歌聲走的播放器、照片相簿和你想說的話。你不必另外下載其他軟體。"
             }
           },
           {
@@ -136,7 +138,7 @@
             "name": "可以指定男聲或女聲嗎？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "可以。心意款是一個版本，男聲或女聲由你選；紀念款則是男聲、女聲兩個版本，都送給你。方案請先在問卷裡選擇，客服會在 LINE 做最後確認，並確認名字該怎麼唸。"
+              "text": "可以。入門款和心意款是一個版本，男聲或女聲由你選；紀念款則是男聲、女聲兩個版本，都送給你。方案請先在問卷裡選擇，客服會在 LINE 做最後確認，並確認名字該怎麼唸。"
             }
           },
           {
@@ -144,7 +146,7 @@
             "name": "可以修改嗎？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "依方案而定。心意款的歌詞可修改 1 次；紀念款歌詞和旋律各可修改 1 次。若有其他需要，下單時可再向客服確認。"
+              "text": "依方案而定。入門款的歌詞可修改 1 次；心意款的歌詞和旋律各可修改 1 次；紀念款的歌詞和旋律在原本的故事方向內，可以修改到你滿意為止。若有其他需要，下單時可再向客服確認。"
             }
           },
           {
@@ -165,10 +167,10 @@
           },
           {
             "@type": "Question",
-            "name": "紀念款的照片要怎麼給？",
+            "name": "照片要怎麼給？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "在 LINE 確認方案後，直接把照片傳給我們即可，最多 10 張。照片到齊後，才會納入急件的交件時間計算。"
+              "text": "心意款和紀念款的字幕影片可以放照片，最多 10 張，建議 5 到 10 張，不到 5 張也沒關係，我們一樣會好好排進影片裡。在 LINE 確認方案後，直接把照片傳給我們即可。紀念款的 3 天急件，從照片到齊後開始計算。入門款不含影片，不需要準備照片。"
             }
           },
           {
@@ -236,7 +238,7 @@
         <ul class="promises">
           <li>加 LINE 就能開始</li>
           <li>先確認歌詞，再匯款製作</li>
-          <li>完成後以音檔與影片交付</li>
+          <li>完成後直接傳到你的 LINE</li>
         </ul>
       </div>
     </section>
@@ -606,45 +608,67 @@
           <h2 id="plans-title">選擇你的方案</h2>
           <div class="flourish" aria-hidden="true"><span>♪</span></div>
         </div>
-        <p class="price-note">開幕優惠：前 20 組訂購紀念款，只要 NT$1,490。</p>
-        <div class="plans-grid">
-          <article class="plan">
-            <h3 class="plan-name">心意款</h3>
-            <p class="plan-price">NT$990</p>
+        <div class="plans-grid plans-grid-3">
+          <article class="plan plan-basic">
+            <h3 class="plan-name">入門款</h3>
+            <p class="plan-price">NT$690</p>
+            <p class="plan-tagline">想先送一首歌，簡單就很動人</p>
             <ul>
-              <li>專屬歌曲</li>
-              <li>一個版本，男聲或女聲由你選</li>
-              <li>歌詞檔，可修改 1 次</li>
-              <li>字幕影片（不含照片）</li>
+              <li>專屬歌曲，一個版本，男聲或女聲由你選</li>
+              <li>歌詞檔</li>
               <li>專屬禮物卡（拆開緞帶的禮物動畫）</li>
+              <li>歌詞可修改 1 次</li>
+              <li class="plan-no">不含影片</li>
             </ul>
             <div class="plan-sample plan-sample-basic">
               <p class="plan-sample-title">歌詞檔範例</p>
-              <div class="plan-sample-thumbs"><button type="button" class="lyric-thumb" data-full="assets/img/lyric-sample-basic.jpg" aria-label="放大查看：心意款歌詞檔範例"><img src="assets/img/lyric-sample-basic.jpg" width="720" height="1018" alt="心意款歌詞檔範例" loading="lazy" decoding="async"></button></div>
+              <div class="plan-sample-thumbs"><button type="button" class="lyric-thumb" data-full="assets/img/lyric-sample-basic.jpg" aria-label="放大查看：歌詞檔範例"><img src="assets/img/lyric-sample-basic.jpg" width="720" height="1018" alt="歌詞檔範例" loading="lazy" decoding="async"></button></div>
               <p class="plan-sample-cap">範例歌曲，故事與人名皆為虛構<br>點圖可放大</p>
             </div>
-            <a class="btn btn-ghost js-order-link" href="https://lin.ee/XaCESBb" target="_blank" rel="noopener noreferrer">我想訂心意款</a>
+            <p class="plan-fit">適合：生日、告白，想簡單送一首歌</p>
+            <a class="btn btn-ghost js-order-link" href="https://lin.ee/XaCESBb" target="_blank" rel="noopener noreferrer">我想訂入門款</a>
           </article>
           <article class="plan plan-featured">
-            <span class="plan-badge">最完整</span>
-            <h3 class="plan-name">紀念款</h3>
-            <p class="plan-price">NT$1,690<span>開幕前 20 組 NT$1,490</span></p>
+            <span class="plan-badge">最多人選</span>
+            <h3 class="plan-name">心意款</h3>
+            <p class="plan-price">NT$990</p>
+            <p class="plan-tagline">有歌、有照片，也有一張歌詞卡</p>
             <ul>
-              <li>心意款的全部內容</li>
-              <li>男聲、女聲兩個版本，都送給你</li>
+              <li>入門款的全部內容</li>
               <li>字幕影片，可放入最多 10 張照片</li>
-              <li>伴奏版音檔，現場也能一起唱</li>
               <li>精美電子歌詞卡</li>
-              <li>專屬禮物卡（拆開緞帶的禮物動畫）</li>
               <li>歌詞可修改 1 次、旋律可修改 1 次</li>
-              <li>3 天急件</li>
             </ul>
             <div class="plan-sample plan-sample-premium">
               <p class="plan-sample-title">精美電子歌詞卡範例</p>
-              <div class="plan-sample-thumbs"><button type="button" class="lyric-thumb" data-full="assets/img/lyric-sample-premium.jpg" aria-label="放大查看：紀念款精美電子歌詞卡範例封面"><img src="assets/img/lyric-sample-premium.jpg" width="720" height="1280" alt="紀念款精美電子歌詞卡範例封面" loading="lazy" decoding="async"></button><button type="button" class="lyric-thumb" data-full="assets/img/lyric-sample-premium-2.jpg" aria-label="放大查看：紀念款精美電子歌詞卡範例歌詞頁"><img src="assets/img/lyric-sample-premium-2.jpg" width="720" height="1280" alt="紀念款精美電子歌詞卡範例歌詞頁" loading="lazy" decoding="async"></button></div>
+              <div class="plan-sample-thumbs"><button type="button" class="lyric-thumb" data-full="assets/img/lyric-sample-premium.jpg" aria-label="放大查看：精美電子歌詞卡範例封面"><img src="assets/img/lyric-sample-premium.jpg" width="720" height="1280" alt="精美電子歌詞卡範例封面" loading="lazy" decoding="async"></button><button type="button" class="lyric-thumb" data-full="assets/img/lyric-sample-premium-2.jpg" aria-label="放大查看：精美電子歌詞卡範例歌詞頁"><img src="assets/img/lyric-sample-premium-2.jpg" width="720" height="1280" alt="精美電子歌詞卡範例歌詞頁" loading="lazy" decoding="async"></button></div>
               <p class="plan-sample-cap">範例歌曲，故事與人名皆為虛構<br>點圖可放大</p>
             </div>
-            <a class="btn btn-primary js-order-link" href="https://lin.ee/XaCESBb" target="_blank" rel="noopener noreferrer">我想訂紀念款</a>
+            <p class="plan-fit">適合：想把照片和回憶，跟歌一起送出去</p>
+            <a class="btn btn-primary js-order-link" href="https://lin.ee/XaCESBb" target="_blank" rel="noopener noreferrer">我想訂心意款</a>
+          </article>
+          <article class="plan plan-premium">
+            <h3 class="plan-name">紀念款</h3>
+            <p class="plan-price">NT$1,590</p>
+            <p class="plan-tagline">最重要的日子，值得最完整的一份</p>
+            <ul>
+              <li>心意款的全部內容</li>
+              <li>男聲、女聲兩個版本，都送給你</li>
+              <li>伴奏版音檔，現場也能一起唱</li>
+              <li>一支手繪風格 MV</li>
+              <li>專屬歌曲頁面：一條網址，<span class="nowrap">打開就像拆禮物</span></li>
+              <li>歌詞和旋律在原本的故事方向內<span class="nowrap">修改到你滿意</span></li>
+              <li>3 天急件</li>
+            </ul>
+            <div class="plan-sample plan-sample-memorial">
+              <p class="plan-sample-title">手繪風格 MV 範例</p>
+              <div class="plan-sample-thumbs"><button type="button" class="lyric-thumb lyric-thumb-wide" data-full="assets/img/mv-sample-handdrawn.jpg" aria-label="放大查看：手繪風格 MV 範例畫面"><img src="assets/img/mv-sample-handdrawn-thumb.jpg" width="640" height="360" alt="手繪風格 MV 範例畫面：夕陽河岸邊相擁的兩人，字幕「只要你還在 我就夠了」" loading="lazy" decoding="async"></button></div>
+              <p class="plan-sample-title plan-sample-title-2">專屬歌曲頁面範例</p>
+              <div class="plan-sample-thumbs"><button type="button" class="lyric-thumb" data-full="assets/img/songpage-sample-full.jpg" aria-label="放大查看：專屬歌曲頁面範例"><img src="assets/img/songpage-sample-cover.jpg" width="480" height="523" alt="專屬歌曲頁面範例：拆禮物的封面" loading="lazy" decoding="async"></button></div>
+              <p class="plan-sample-cap">範例歌曲，故事與人名皆為虛構<br>點圖可放大</p>
+            </div>
+            <p class="plan-fit">適合：求婚、結婚、紀念日</p>
+            <a class="btn btn-ghost js-order-link" href="https://lin.ee/XaCESBb" target="_blank" rel="noopener noreferrer">我想訂紀念款</a>
           </article>
         </div>
         <p class="pay-note">歌詞確認後，以匯款一次付清全額，收到款項後開始製作。</p>
@@ -683,7 +707,7 @@
           <li class="step">
             <div class="step-num">05</div>
             <h3>在 LINE 收到這份心意</h3>
-            <p>歌曲、歌詞檔與字幕影片會直接傳到你的 LINE。紀念款另有照片影片、伴奏版和電子歌詞卡。</p>
+            <p>歌曲和歌詞檔會直接傳到你的 LINE。心意款另有照片字幕影片和電子歌詞卡；紀念款再加上男女聲兩個版本、伴奏版、手繪風格 MV，還有一條打開就像拆禮物的專屬歌曲頁面網址。</p>
             <p class="step-note">不必另外下載其他軟體，由你決定怎麼把歌送到<span class="nowrap">他／她／它</span>手上。</p>
           </li>
         </ol>
@@ -707,15 +731,15 @@
           </details>
           <details class="faq-item">
             <summary>會收到什麼？</summary>
-            <p>完成後會在 LINE 收到歌曲音檔（MP3）、歌詞檔，以及字幕影片（MP4）。心意款為一個版本，男聲或女聲由你選，影片不含照片；紀念款可把最多 10 張照片放進字幕影片，另外附伴奏版音檔和電子歌詞卡，並送上男聲、女聲兩個版本。你不必另外下載其他軟體。</p>
+            <p>依方案而定，全部都直接傳到你的 LINE。入門款會收到一個版本的歌曲音檔（MP3，男聲或女聲由你選）、歌詞檔和專屬禮物卡，不含影片。心意款再加上可放入最多 10 張照片的字幕影片（MP4）和精美電子歌詞卡。紀念款再加上男聲、女聲兩個版本、伴奏版音檔、一支手繪風格 MV，以及一個專屬歌曲頁面：一條網址，在 LINE 就能直接打開，有拆禮物的封面、歌詞跟著歌聲走的播放器、照片相簿和你想說的話。你不必另外下載其他軟體。</p>
           </details>
           <details class="faq-item">
             <summary>可以指定男聲或女聲嗎？</summary>
-            <p>可以。心意款是一個版本，男聲或女聲由你選；紀念款則是男聲、女聲兩個版本，都送給你。方案請先在問卷裡選擇，客服會在 LINE 做最後確認，並確認名字該怎麼唸。</p>
+            <p>可以。入門款和心意款是一個版本，男聲或女聲由你選；紀念款則是男聲、女聲兩個版本，都送給你。方案請先在問卷裡選擇，客服會在 LINE 做最後確認，並確認名字該怎麼唸。</p>
           </details>
           <details class="faq-item">
             <summary>可以修改嗎？</summary>
-            <p>依方案而定。心意款的歌詞可修改 1 次；紀念款歌詞和旋律各可修改 1 次。若有其他需要，下單時可再向客服確認。</p>
+            <p>依方案而定。入門款的歌詞可修改 1 次；心意款的歌詞和旋律各可修改 1 次；紀念款的歌詞和旋律在原本的故事方向內，可以修改到你滿意為止。若有其他需要，下單時可再向客服確認。</p>
           </details>
           <details class="faq-item">
             <summary>多久可以完成？</summary>
@@ -726,8 +750,8 @@
             <p>歌詞確認後以匯款一次付清全額，收到款項後就開始製作。匯款資訊會由客服在 LINE 提供。</p>
           </details>
           <details class="faq-item">
-            <summary>紀念款的照片要怎麼給？</summary>
-            <p>在 LINE 確認方案後，直接把照片傳給我們即可，最多 10 張。照片到齊後，才會納入急件的交件時間計算。</p>
+            <summary>照片要怎麼給？</summary>
+            <p>心意款和紀念款的字幕影片可以放照片，最多 10 張，建議 5 到 10 張，不到 5 張也沒關係，我們一樣會好好排進影片裡。在 LINE 確認方案後，直接把照片傳給我們即可。紀念款的 3 天急件，從照片到齊後開始計算。入門款不含影片，不需要準備照片。</p>
           </details>
           <details class="faq-item">
             <summary>會公開我們的故事或歌曲嗎？</summary>
