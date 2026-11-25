@@ -1523,3 +1523,48 @@ section { padding: var(--section-y) 0; }
 .lyric-lightbox.is-open { display: flex; }
 .lyric-lightbox img { max-width: 100%; max-height: 100%; width: auto; height: auto; border-radius: 10px; background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
 .lyric-lightbox-close { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255,255,255,0.92); color: #5A2E34; font-size: 26px; line-height: 44px; padding: 0; cursor: pointer; }
+
+/* 三個方案（2026-11-26） */
+.plans-grid.plans-grid-3 { max-width: 520px; }
+.plan-tagline { margin: 6px 0 0; font-size: 0.92rem; line-height: 1.6; color: var(--ink-soft, #6b4a4e); }
+.plan li.plan-no { color: var(--ink-faint, #8a7073); }
+.plan li.plan-no::before { background: transparent; border: 1px solid currentColor; }
+.plans-grid-3 .plan-featured { border: 2px solid #B76E79; box-shadow: 0 22px 50px rgba(142, 62, 70, 0.20); }
+.plans-grid-3 .plan .btn { margin-top: auto; }
+.plans-grid-3 .plan { display: flex; flex-direction: column; }
+@media (min-width: 720px) {
+  .plans-grid.plans-grid-3 { grid-template-columns: 1fr; }
+  .plans-grid-3 .plan-featured { transform: none; }
+}
+@media (min-width: 960px) {
+  .plans-grid.plans-grid-3 { max-width: 1120px; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; }
+  .plans-grid-3 .plan { padding: 32px 24px 26px; }
+  .plans-grid-3 .plan-featured { transform: translateY(-10px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plans-grid-3 .plan-featured { transform: none; }
+}
+
+/* 紀念款：手繪風格 MV＋專屬歌曲頁面範例（2026-11-26） */
+.plan-sample-memorial { background: linear-gradient(160deg, #FFF8F3, #F9E7E4); border: 1px solid #D9AFA0; box-shadow: 0 6px 18px rgba(184,116,104,0.18); }
+.plan-sample-memorial .plan-sample-title { color: #A5594F; font-weight: 600; }
+.plan-sample-memorial .plan-sample-title-2 { margin-top: 14px; }
+.plan-sample-memorial .lyric-thumb { width: 52%; max-width: 170px; border: 1.5px solid #D9AFA0; box-shadow: 0 6px 16px rgba(184,116,104,0.28); }
+.plan-sample-memorial .lyric-thumb.lyric-thumb-wide { width: 100%; max-width: 320px; border-radius: 10px; }
+
+/* 方案卡不留空（2026-11-26） */
+.plans-grid-3 .plan ul { flex: 0 0 auto; margin-bottom: 18px; }
+.plans-grid-3 .plan-sample { flex: 1 1 auto; display: flex; flex-direction: column; justify-content: center; margin-bottom: 16px; }
+.plans-grid-3 .plan .btn { margin-top: 0; }
+.plans-grid-3 .plan-sample-basic .lyric-thumb { width: 78%; max-width: 250px; }
+.plans-grid-3 .plan-sample-premium .lyric-thumb { width: 48%; max-width: 170px; }
+.plans-grid-3 .plan-sample-memorial .lyric-thumb { width: 46%; max-width: 150px; }
+.plans-grid-3 .plan-sample-memorial .lyric-thumb.lyric-thumb-wide { width: 100%; max-width: 320px; }
+.plan-fit { margin: 0 0 16px; padding: 10px 14px; border-radius: 12px; background: rgba(183, 110, 121, 0.08); font-size: 0.9rem; line-height: 1.6; color: var(--ink-soft, #6b4a4e); text-align: center; }
+.plan-featured .plan-fit { background: rgba(183, 110, 121, 0.14); }
+.plans-grid-3 .plan-sample-memorial .lyric-thumb:not(.lyric-thumb-wide) { width: 52%; max-width: 170px; }
+@media (min-width: 960px) {
+  .plans-grid-3 .plan-sample-basic .lyric-thumb { width: 100%; max-width: 290px; }
+  .plans-grid-3 .plan-sample-premium .plan-sample-thumbs { flex-direction: column; align-items: center; }
+  .plans-grid-3 .plan-sample-premium .lyric-thumb { width: 55%; max-width: 180px; }
+}
