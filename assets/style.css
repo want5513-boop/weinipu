@@ -1568,3 +1568,19 @@ section { padding: var(--section-y) 0; }
   .plans-grid-3 .plan-sample-premium .plan-sample-thumbs { flex-direction: column; align-items: center; }
   .plans-grid-3 .plan-sample-premium .lyric-thumb { width: 55%; max-width: 180px; }
 }
+
+/* 範例歌：看完整 MV 連結（2026-11-27） */
+.sample-mv {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--rose-deep);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(142, 62, 70, 0.3);
+  padding-bottom: 1px;
+}
+.sample-mv::after { content: "↗"; font-size: 0.8em; }
+.sample-mv:hover, .sample-mv:focus-visible { border-bottom-color: var(--rose-deep); }
