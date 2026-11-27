@@ -3,6 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ES0PZV06WK"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ES0PZV06WK');
+
+    document.addEventListener('click', function (event) {
+      var node = event.target;
+      var link = node && node.closest ? node.closest('a[href]') : null;
+      if (!link || !isLineAddLink(link)) return;
+      gtag('event', 'line_click', {
+        link_url: link.href,
+        page_path: location.pathname + location.search,
+        transport_type: 'beacon'
+      });
+    }, true);
+
+    function isLineAddLink(link) {
+      var raw = (link.getAttribute('href') || '').trim();
+      if (/^line:/i.test(raw)) return true;
+      var href = link.href || raw;
+      if (/^line:/i.test(href)) return true;
+      try {
+        var host = new URL(href, location.href).hostname.toLowerCase().replace(/\.$/, '');
+        return host === 'lin.ee' || host.endsWith('.lin.ee') || host === 'line.me' || host.endsWith('.line.me');
+      } catch (err) {
+        return false;
+      }
+    }
+  </script>
   <title>為你譜 Weinipu｜把你們的故事寫成一首歌</title>
   <meta name="description" content="為你譜幫你把名字、回憶和地點寫成專屬客製化歌曲：生日歌、紀念日、告白、寵物、結婚、班歌都可以。歌曲和歌詞檔直接傳到 LINE。">
   <meta name="theme-color" content="#FBF6F1">
