@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#FFF3DC">
+<meta name="format-detection" content="telephone=no">
+<title>〈要不要喝ㄋㄟㄋㄟ〉 送給萌萌和阿肥</title>
+<link rel="icon" href="data:,">
+<style>
+@font-face{font-family:"HuninnSub";src:url("huninn-sub.woff2") format("woff2");font-display:swap}
+:root{
+  --cream:#FFF6E3; --cream2:#FBE4B8; --gold:#E2B04B; --gold-l:#F4D07D; --gold-d:#B07E28; --ink:#5E3E1E; --soft:#8C6A44; --pink:#F0A096;
+  --sans:"PingFang TC","Heiti TC","Noto Sans TC","Noto Sans CJK TC","Microsoft JhengHei","Source Han Sans TC",system-ui,-apple-system,sans-serif;
+  --cute:"HuninnSub","PingFang TC","Noto Sans TC","Noto Sans CJK TC","Microsoft JhengHei",sans-serif;
+  --vh:100vh;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:radial-gradient(120% 90% at 50% 30%,#FFFBF0 0%,#FBE9C4 100%) fixed;background-color:var(--cream);min-height:100vh;overflow-x:hidden}
+body.locked{overflow:hidden;height:100vh}
+button{font:inherit;color:inherit;border:0;background:none;padding:0;cursor:pointer}
+
+/* ================= COVER ================= */
+#cover{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(110% 80% at 50% 40%,#FFFDF5 0%,#FDEBC6 70%,#F8D99C 100%);cursor:pointer;transition:opacity .9s ease,transform .9s ease;overflow:hidden;user-select:none;-webkit-user-select:none}
+#cover.done{opacity:0;transform:scale(1.04);pointer-events:none}
+.cv-top{font-family:var(--cute);text-align:center;color:var(--gold-d);font-size:19px;line-height:1.7;letter-spacing:.08em;margin-bottom:6px;transition:opacity .6s}
+.cv-top b{display:block;font-weight:400;color:var(--ink);font-size:25px;letter-spacing:.06em}
+#gift{width:min(88vw,370px);height:auto;overflow:visible;animation:idle 2.6s ease-in-out infinite;transform-origin:50% 90%}
+@keyframes idle{0%,100%{transform:rotate(0) translateY(0)}20%{transform:rotate(-1.6deg)}40%{transform:rotate(1.6deg) translateY(-3px)}60%{transform:rotate(-1deg)}80%{transform:rotate(.6deg)}}
+.cv-hint{font-family:var(--cute);color:var(--gold-d);font-size:18px;letter-spacing:.12em;margin-top:8px;animation:pulse 1.8s ease-in-out infinite;transition:opacity .4s}
+.cv-hint i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--gold);margin-right:10px;vertical-align:1px;box-shadow:0 0 0 0 rgba(226,176,75,.6);animation:ring 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(226,176,75,.6)}100%{box-shadow:0 0 0 14px rgba(226,176,75,0)}}
+#cover.opening .cv-hint,#cover.opening .cv-top{opacity:0;animation:none}
+#cover.opening #gift{animation:none}
+#cover.opening #gift{animation:hop .5s ease-out}
+@keyframes hop{0%{transform:translateY(0) scale(1)}35%{transform:translateY(8px) scale(1.03,.96)}100%{transform:translateY(0) scale(1)}}
+/* gift pieces */
+#gift g,#gift ellipse,#gift rect,#gift path{transform-box:fill-box}
+#gift .rib-l,#gift .rib-r,#gift .loopL,#gift .loopR,#gift .tailL,#gift .tailR,#gift .knot,#gift #lid,#gift .bird{transition:transform 1s cubic-bezier(.5,0,.3,1),opacity .8s ease}
+#gift .loopL,#gift .loopR,#gift .tailL,#gift .tailR,#gift .knot{transform-origin:center}
+#gift.open .rib-l{transform:translateX(-46px);opacity:0}
+#gift.open .rib-r{transform:translateX(46px);opacity:0}
+#gift.open .loopL{transform:translate(-40px,-6px) rotate(-60deg) scale(.45);opacity:0}
+#gift.open .loopR{transform:translate(40px,-6px) rotate(60deg) scale(.45);opacity:0}
+#gift.open .tailL{transform:translate(-50px,56px) rotate(55deg);opacity:0}
+#gift.open .tailR{transform:translate(50px,56px) rotate(-55deg);opacity:0}
+#gift.open .knot{transform:scale(.1);opacity:0}
+#gift.open #lid{transform:translate(-44px,-190px) rotate(-24deg);opacity:0;transition-delay:.55s,.9s;transition-duration:1.1s,.5s}
+#gift .bird{transform:translateY(62px)}
+#gift.open .bird{transform:translateY(-6px);transition-delay:1.2s;transition-duration:.6s;transition-timing-function:cubic-bezier(.3,1.6,.5,1)}
+#gift.open .bird.b2{transition-delay:1.32s}
+#burst{opacity:0;transform:scale(.2);transform-origin:50% 50%;transform-box:fill-box}
+#gift.open #burst{animation:burst 1.6s ease-out .55s forwards}
+@keyframes burst{0%{opacity:0;transform:scale(.2)}30%{opacity:1}100%{opacity:.0;transform:scale(2.3)}}
+.pt{position:absolute;width:16px;height:16px;pointer-events:none;background-size:contain;background-repeat:no-repeat;z-index:3}
+
+/* ================= MAIN ================= */
+#app{opacity:0;transition:opacity .9s ease .2s;position:relative}
+#app.show{opacity:1}
+.stage{height:100vh;height:100dvh;min-height:560px;display:flex;flex-direction:column;padding:max(14px,env(safe-area-inset-top)) 18px max(12px,env(safe-area-inset-bottom));max-width:560px;margin:0 auto}
+.top{text-align:center;flex:none}
+.hero{width:78px;height:78px;margin:0 auto 6px;border-radius:50%;overflow:hidden;border:3px solid var(--gold);box-shadow:0 6px 16px rgba(176,126,40,.28)}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block}
+.eyebrow{margin:2px 0 0;font-family:var(--cute);color:var(--gold-d);font-size:15px;letter-spacing:.14em}
+h1.title{margin:2px 0 10px;font-family:var(--cute);font-weight:400;font-size:clamp(23px,7.3vw,32px);letter-spacing:.02em;color:var(--ink);white-space:nowrap}
+.toggle{display:inline-flex;background:rgba(255,255,255,.7);border:2px solid var(--gold);border-radius:999px;padding:3px;gap:2px}
+.toggle button{font-family:var(--cute);font-size:16px;padding:7px 22px;border-radius:999px;color:var(--gold-d);letter-spacing:.08em;transition:background .25s,color .25s}
+.toggle button[aria-pressed="true"]{background:linear-gradient(180deg,#F7D77F,#E2B04B);color:#5b3b12;box-shadow:0 2px 6px rgba(176,126,40,.35)}
+.lyrics{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;margin:10px -6px 4px;padding:90px 6px 110px;text-align:center;scrollbar-width:none;overscroll-behavior:contain;
+  -webkit-mask-image:linear-gradient(transparent 0,#000 16%,#000 84%,transparent 100%);mask-image:linear-gradient(transparent 0,#000 16%,#000 84%,transparent 100%)}
+.lyrics::-webkit-scrollbar{display:none}
+.sec{display:inline-block;margin:22px 0 8px;padding:3px 16px;border:2px solid var(--gold);border-radius:999px;background:#FDEEC8;color:var(--gold-d);font-family:var(--cute);font-size:13px;letter-spacing:.12em}
+.sec-w{display:block;text-align:center}
+.ln{margin:0;padding:7px 8px;font-size:18px;line-height:1.55;color:#B79A74;border-radius:14px;transition:color .35s,transform .35s,background .35s;cursor:pointer;transform-origin:50% 50%}
+.ln.past{color:#A98E6A}
+.ln.on{color:#4B2D0E;font-weight:700;font-size:20px;background:linear-gradient(90deg,rgba(244,208,125,0),rgba(244,208,125,.55) 20%,rgba(244,208,125,.55) 80%,rgba(244,208,125,0));transform:scale(1.03)}
+.player{flex:none;display:flex;align-items:center;gap:14px;padding:10px 4px 2px}
+#play{flex:none;width:62px;height:62px;border-radius:50%;background:linear-gradient(180deg,#F8DA86,#E0AC45);box-shadow:0 6px 14px rgba(176,126,40,.4),inset 0 2px 0 rgba(255,255,255,.55);display:grid;place-items:center}
+#play svg{width:28px;height:28px;fill:#5b3b12}
+#play:active{transform:scale(.95)}
+.seek{flex:1;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--soft);font-variant-numeric:tabular-nums}
+.seek span{width:36px;text-align:center}
+input[type=range]{-webkit-appearance:none;appearance:none;flex:1;height:28px;background:transparent;margin:0;--p:0%}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:8px;background:linear-gradient(90deg,var(--gold) var(--p),#F0DEB8 var(--p))}
+input[type=range]::-moz-range-track{height:8px;border-radius:8px;background:#F0DEB8}
+input[type=range]::-moz-range-progress{height:8px;border-radius:8px;background:var(--gold)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:4px solid var(--gold);margin-top:-7px;box-shadow:0 2px 5px rgba(0,0,0,.2)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:4px solid var(--gold)}
+.more{flex:none;text-align:center;font-family:var(--cute);color:var(--gold-d);font-size:13px;letter-spacing:.1em;padding:4px 0 0;opacity:.85;width:100%}
+.more svg{width:14px;height:14px;vertical-align:-2px;margin-left:4px;stroke:var(--gold-d);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+section.blk{max-width:560px;margin:0 auto;padding:46px 18px 10px;text-align:center}
+h2{font-family:var(--cute);font-weight:400;font-size:24px;color:var(--ink);margin:0 0 18px;letter-spacing:.14em}
+h2::before,h2::after{content:"";display:inline-block;width:34px;height:2px;background:var(--gold-l);vertical-align:middle;margin:0 12px 4px}
+.note{position:relative;margin:0 auto;padding:34px 26px 30px;background:#FFFCF4;border:2px solid var(--gold);border-radius:26px;box-shadow:0 10px 26px rgba(176,126,40,.2);font-size:21px;line-height:1.9;color:#4B2D0E;font-weight:600}
+.note::before,.note::after{position:absolute;font-family:var(--cute);font-size:42px;color:var(--gold-l);line-height:1}
+.note::before{content:"「";left:14px;top:-14px;background:#FFFCF4;padding:0 4px}.note::after{content:"」";right:14px;bottom:-26px;background:#FFFCF4;padding:0 4px}
+.note p{margin:0}
+.note small{display:block;margin-top:14px;font-size:13px;font-weight:400;color:var(--soft);letter-spacing:.1em}
+.grid{display:flex;gap:12px;align-items:flex-start}.grid .col{flex:1;min-width:0}
+.ph{display:block;width:100%;margin:0 0 12px;background:#fff;padding:7px 7px 7px;border-radius:12px;box-shadow:0 5px 14px rgba(176,126,40,.22);border:1px solid #F1DDB4;transition:transform .2s}
+.ph:active{transform:scale(.97)}
+.ph img{width:100%;height:auto;display:block;border-radius:7px;background:#F4E7C8}
+footer{text-align:center;color:#B79A74;font-size:12px;letter-spacing:.14em;padding:34px 0 max(30px,env(safe-area-inset-bottom))}
+footer span{font-family:var(--cute)}
+
+/* lightbox */
+#lb{position:fixed;inset:0;z-index:80;background:rgba(36,22,8,.94);display:none;align-items:center;justify-content:center;touch-action:pan-y}
+#lb.show{display:flex}
+#lb img{max-width:100vw;max-height:84vh;max-height:84dvh;object-fit:contain;border-radius:6px;transition:opacity .2s;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+#lb button{position:absolute;color:#FFF3DC;width:48px;height:48px;border-radius:50%;background:rgba(60,38,12,.55);border:1.5px solid rgba(255,243,220,.5);display:grid;place-items:center}
+#lb button svg{width:24px;height:24px;stroke:#FFF3DC;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+#lb .x{top:max(14px,env(safe-area-inset-top));right:14px}
+#lb .pv{left:8px;top:50%;margin-top:-24px}#lb .nx{right:8px;top:50%;margin-top:-24px}
+#lb .ct{position:absolute;bottom:max(20px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:#F4D07D;font-size:14px;letter-spacing:.2em}
+@media (prefers-reduced-motion:reduce){#gift,.cv-hint,.cv-hint i{animation:none!important}}
+
+</style>
+</head>
+<body class="locked">
+<noscript><p style="padding:24px;text-align:center">請開啟 JavaScript 以拆開這份禮物。</p></noscript>
+
+<!-- ============ 拆禮物封面 ============ -->
+<div id="cover" role="button" tabindex="0" aria-label="輕點，拆開禮物">
+  <div class="cv-top">有一份禮物<b>送給萌萌和阿肥</b></div>
+  <svg id="gift" viewBox="0 0 300 330" aria-hidden="true">
+    <defs>
+      <radialGradient id="bg1" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFF4C8" stop-opacity="1"/><stop offset="1" stop-color="#FFE9A0" stop-opacity="0"/></radialGradient>
+      <linearGradient id="bodyg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3C56C"/><stop offset="1" stop-color="#DCA444"/></linearGradient>
+      <linearGradient id="lidg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FBDB8E"/><stop offset="1" stop-color="#F1C466"/></linearGradient>
+      <symbol id="birdG" viewBox="0 0 190 200"><ellipse cx="95" cy="128" rx="85" ry="72" fill="#C4D65C"/><ellipse cx="95" cy="150" rx="55" ry="50" fill="#FAF0AA"/><ellipse cx="39" cy="126" rx="31" ry="34" fill="#78AA46"/><ellipse cx="151" cy="126" rx="31" ry="34" fill="#78AA46"/><ellipse cx="95" cy="67" rx="77" ry="63" fill="#C4D65C"/><ellipse cx="45" cy="83" rx="15" ry="13" fill="#FFAAA0" opacity=".6"/><ellipse cx="145" cy="83" rx="15" ry="13" fill="#FFAAA0" opacity=".6"/><circle cx="62" cy="64" r="11" fill="#32241E"/><circle cx="128" cy="64" r="11" fill="#32241E"/><circle cx="65" cy="59" r="4" fill="#fff"/><circle cx="131" cy="59" r="4" fill="#fff"/><path d="M79 78h32l-16 28z" fill="#F4967A"/></symbol>
+      <symbol id="birdB" viewBox="0 0 190 200"><ellipse cx="95" cy="128" rx="85" ry="72" fill="#C4D0DE"/><ellipse cx="95" cy="150" rx="55" ry="50" fill="#F6F6F8"/><ellipse cx="39" cy="126" rx="31" ry="34" fill="#8CAAC8"/><ellipse cx="151" cy="126" rx="31" ry="34" fill="#8CAAC8"/><ellipse cx="95" cy="67" rx="77" ry="63" fill="#C4D0DE"/><ellipse cx="45" cy="83" rx="15" ry="13" fill="#FFAAA0" opacity=".6"/><ellipse cx="145" cy="83" rx="15" ry="13" fill="#FFAAA0" opacity=".6"/><circle cx="62" cy="64" r="11" fill="#32241E"/><circle cx="128" cy="64" r="11" fill="#32241E"/><circle cx="65" cy="59" r="4" fill="#fff"/><circle cx="131" cy="59" r="4" fill="#fff"/><path d="M79 78h32l-16 28z" fill="#F4967A"/></symbol>
+    </defs>
+    <circle id="burst" cx="150" cy="150" r="120" fill="url(#bg1)"/>
+    <ellipse cx="150" cy="300" rx="112" ry="13" fill="#B07E28" opacity=".22"/>
+    <!-- birds hide behind the box until it opens -->
+    <g class="bird b1"><use href="#birdG" x="52" y="104" width="78" height="82"/></g>
+    <g class="bird b2"><use href="#birdB" x="170" y="104" width="78" height="82"/></g>
+    <!-- box body -->
+    <rect x="45" y="170" width="210" height="128" rx="14" fill="url(#bodyg)"/>
+    <g fill="#FFEBBE" opacity=".8"><circle cx="72" cy="200" r="4"/><circle cx="100" cy="240" r="4"/><circle cx="72" cy="272" r="4"/><circle cx="204" cy="200" r="4"/><circle cx="228" cy="240" r="4"/><circle cx="204" cy="274" r="4"/></g>
+    <rect class="rib-l" x="132" y="170" width="18" height="128" fill="#FFFAEE"/><rect class="rib-r" x="150" y="170" width="18" height="128" fill="#FFFAEE"/>
+    <rect class="rib-l" x="132" y="170" width="3" height="128" fill="#EADCC0"/><rect class="rib-r" x="165" y="170" width="3" height="128" fill="#EADCC0"/>
+    <!-- lid -->
+    <g id="lid">
+      <rect x="34" y="132" width="232" height="46" rx="12" fill="url(#lidg)"/>
+      <rect x="34" y="164" width="232" height="14" rx="8" fill="#E8B85C"/>
+      <rect x="44" y="138" width="212" height="7" rx="3.5" fill="#FFF0C4" opacity=".7"/>
+      <rect class="rib-l" x="132" y="132" width="18" height="46" fill="#FFFAEE"/><rect class="rib-r" x="150" y="132" width="18" height="46" fill="#FFFAEE"/>
+      <g transform="translate(150,126)">
+        <path class="tailL" d="M-4 6l-22 56 14-5 6 12 16-52z" fill="#FFFAEE" stroke="#EADCC0" stroke-width="2" stroke-linejoin="round"/>
+        <path class="tailR" d="M4 6l22 56-14-5-6 12-16-52z" fill="#FFFAEE" stroke="#EADCC0" stroke-width="2" stroke-linejoin="round"/>
+        <ellipse class="loopL" cx="-30" cy="-12" rx="34" ry="21" transform="rotate(-18 -30 -12)" fill="#FFFAEE" stroke="#EADCC0" stroke-width="3"/>
+        <ellipse class="loopR" cx="30" cy="-12" rx="34" ry="21" transform="rotate(18 30 -12)" fill="#FFFAEE" stroke="#EADCC0" stroke-width="3"/>
+        <circle class="knot" cx="0" cy="0" r="12" fill="#FFFAEE" stroke="#EADCC0" stroke-width="3"/>
+      </g>
+    </g>
+  </svg>
+  <div class="cv-hint"><i></i>輕點，拆開禮物</div>
+</div>
+
+<!-- ============ 歌曲頁 ============ -->
+<div id="app" aria-hidden="true">
+  <section class="stage">
+    <header class="top">
+      <div class="hero"><img src="hero.jpg" alt="手繪風插畫" width="78" height="78"></div>
+      <p class="eyebrow">送給萌萌和阿肥</p>
+      <h1 class="title">〈要不要喝ㄋㄟㄋㄟ〉</h1>
+      <div class="toggle" role="group" aria-label="選擇版本">
+        <button type="button" data-v="male" aria-pressed="true">男聲版</button>
+        <button type="button" data-v="female" aria-pressed="false">女聲版</button>
+      </div>
+    </header>
+    <div class="lyrics" id="lyrics" aria-label="歌詞"></div>
+    <div class="player">
+      <button id="play" type="button" aria-label="播放"><svg viewBox="0 0 24 24" id="ico"><path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/></svg></button>
+      <div class="seek"><span id="cur">0:00</span><input type="range" id="seek" min="0" max="1000" value="0" aria-label="播放進度"><span id="dur">0:00</span></div>
+    </div>
+    <button class="more" type="button" id="more">想說的話與相簿<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+  </section>
+
+  <section class="blk" id="msg">
+    <h2>想說的話</h2>
+    <!-- 想說的話：客人在問卷中填寫的原文（逐字使用；原文寫「搗蛋」，保持原樣）。 -->
+    <div class="note"><p>雖然你們很愛搗蛋，<br>但謝謝你們來當我們的寶</p></div>
+  </section>
+
+  <section class="blk" id="album">
+    <h2>相簿</h2>
+    <div class="grid" id="grid"></div>
+  </section>
+  <footer><span>為你譜 Weinipu</span></footer>
+</div>
+
+<!-- lightbox -->
+<div id="lb" role="dialog" aria-modal="true" aria-label="照片">
+  <img id="lbimg" alt="">
+  <button class="x" type="button" aria-label="關閉"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="pv" type="button" aria-label="上一張"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="nx" type="button" aria-label="下一張"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+  <div class="ct" id="lbct"></div>
+</div>
+
+<audio id="au" preload="none" playsinline webkit-playsinline></audio>
+
+<script>
+(function(){
+"use strict";
+var D={"lines": ["天才剛亮 窗簾還沒拉開", "小小的嗓門 已經在等我起來", "歪著頭 拍拍翅膀 學我說話的姿態", "每天的第一句 都是你們的安排", "萌萌跑進遊戲室 一玩就是一整天", "阿肥慢慢挪過來 把頭塞進我手邊", "搗蛋的證據 散落在房間每一邊", "想罵你們兩句 話到嘴邊又變甜", "你們不懂什麼叫做愛", "卻把我的日子 塞得滿滿", "天還沒亮 鬧鐘還沒響", "就有人問我——", "要不要喝ㄋㄟㄋㄟ 要不要喝ㄋㄟㄋㄟ", "歪著頭問我 比鬧鐘還準時", "七年的早晨 都從這句開始", "搗蛋也沒關係 你們是我的寶貝", "阿肥一睡著 就忘了自己是隻鳥吧", "頭歪一邊 腳一縮 睡成一幅奇怪的畫", "萌萌在旁邊 吵著要人陪她玩耍", "這個家 被你們吵成了一個家", "你們不懂什麼叫做愛", "卻把我的日子 塞得滿滿", "就算吵到 我想投降", "還是想聽你們問——", "要不要喝ㄋㄟㄋㄟ 要不要喝ㄋㄟㄋㄟ", "歪著頭問我 比鬧鐘還準時", "七年的早晨 都從這句開始", "搗蛋也沒關係 你們是我的寶貝", "有一句話 我一直沒說", "雖然你們很愛搗蛋", "謝謝你們 來當我們的寶", "明天早上 也要記得——", "要不要喝ㄋㄟㄋㄟ 要不要喝ㄋㄟㄋㄟ", "萌萌和阿肥 一個都不能少", "七年的早晨 還要一直繼續", "搗蛋也沒關係 你們是我的寶貝", "要不要喝ㄋㄟㄋㄟ……", "好啦 一起喝"], "secs": {"0": "主歌 1", "8": "預備副歌", "12": "副歌", "16": "主歌 2", "20": "預備副歌", "24": "副歌", "28": "橋段", "32": "最終副歌", "36": "尾聲"}, "male": [[10.36, 13.2], [14.18, 18.02], [18.8, 22.64], [23.42, 27.28], [28.4, 31.86], [32.74, 36.84], [37.44, 41.46], [42.02, 46.1], [47.36, 49.78], [49.86, 52.06], [52.2, 54.44], [54.52, 55.84], [56.28, 59.84], [60.94, 64.98], [65.28, 69.94], [70.26, 73.96], [84.5, 88.34], [88.54, 93.0], [93.18, 97.6], [97.86, 101.76], [103.18, 105.64], [105.72, 107.96], [108.06, 110.22], [110.26, 111.82], [112.14, 115.7], [116.82, 120.78], [121.12, 125.8], [126.12, 129.68], [131.54, 133.68], [133.96, 136.16], [136.28, 138.28], [138.34, 142.2], [160.82, 162.3], [165.7, 169.76], [170.0, 174.72], [175.0, 178.62], [179.64, 188.0], [188.94, 190.14]], "female": [[15.06, 17.84], [18.86, 22.86], [23.6, 28.28], [28.6, 32.18], [33.36, 37.92], [38.36, 42.66], [43.32, 47.38], [47.7, 51.28], [52.42, 56.12], [56.54, 60.8], [61.22, 65.08], [65.96, 68.22], [70.66, 72.24], [75.96, 79.62], [80.04, 84.5], [84.74, 88.78], [90.08, 93.88], [94.18, 99.22], [99.52, 103.72], [104.18, 107.62], [108.6, 112.48], [113.0, 116.98], [117.7, 121.46], [122.42, 127.44], [127.46, 128.74], [132.44, 136.16], [136.5, 141.44], [141.58, 145.2], [156.54, 159.4], [160.66, 163.96], [165.66, 168.82], [170.08, 172.86], [174.5, 178.12], [179.5, 183.06], [183.58, 188.5], [188.64, 192.28], [193.08, 195.72], [198.0, 200.22]]};
+var DUR={male:199.81,female:218.64};
+var SRC={male:"male.mp3",female:"female.mp3"};
+var $=function(i){return document.getElementById(i)};
+var au=$("au"),lyr=$("lyrics"),playBtn=$("play"),seek=$("seek"),cur=$("cur"),dur=$("dur");
+var ver="male",opened=false,pauseScrollUntil=0,lastIdx=-2,lastOn=null,raf=0,loaded=null;
+
+/* ---------- viewport height fix for in-app browsers ---------- */
+function vh(){document.documentElement.style.setProperty("--vh",(window.innerHeight)+"px")}
+vh();window.addEventListener("resize",vh);
+
+/* ---------- lyrics DOM ---------- */
+var lines=[];
+(function(){
+  var frag=document.createDocumentFragment();
+  D.lines.forEach(function(t,i){
+    if(D.secs[i]){var w=document.createElement("div");w.className="sec-w";var s=document.createElement("span");s.className="sec";s.textContent=D.secs[i];w.appendChild(s);frag.appendChild(w)}
+    var p=document.createElement("p");p.className="ln";p.textContent=t;p.setAttribute("data-i",i);frag.appendChild(p);lines.push(p);
+  });
+  lyr.appendChild(frag);
+})();
+lyr.addEventListener("click",function(e){
+  var el=e.target.closest(".ln");if(!el||!opened)return;
+  var i=+el.getAttribute("data-i");seekTo(D[ver][i][0]);play();
+});
+["touchstart","wheel","mousedown"].forEach(function(ev){lyr.addEventListener(ev,function(){pauseScrollUntil=Date.now()+3500},{passive:true})});
+
+/* ---------- time + sync ---------- */
+function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+":"+("0"+(s%60)).slice(-2)}
+function total(){return (isFinite(au.duration)&&au.duration>1)?au.duration:DUR[ver]}
+function activeAt(t){
+  var tm=D[ver],idx=-1,i;
+  for(i=0;i<tm.length;i++){if(t>=tm[i][0]-0.12)idx=i;else break}
+  if(idx<0)return {idx:-1,on:false};
+  var nextStart=idx+1<tm.length?tm[idx+1][0]:Infinity,end=tm[idx][1],gap=nextStart-end;
+  var on=!(gap>6&&t>end+2.5)&&!(nextStart===Infinity&&t>end+3);
+  return {idx:idx,on:on};
+}
+function paint(idx,on){
+  if(idx===lastIdx&&on===lastOn)return;
+  lastIdx=idx;lastOn=on;
+  for(var i=0;i<lines.length;i++){
+    var c="ln";
+    if(on&&i===idx)c+=" on";
+    else if(i<=idx&&idx>=0)c+=" past";
+    if(lines[i].className!==c)lines[i].className=c;
+  }
+  var target=idx<0?0:(on?idx:Math.min(idx+1,lines.length-1));
+  if(idx>=0||on)scrollTo2(target);
+  else scrollTo2(0);
+}
+function scrollTo2(i){
+  if(Date.now()<pauseScrollUntil)return;
+  var el=lines[i];if(!el)return;
+  var top=el.offsetTop-lyr.clientHeight/2+el.offsetHeight/2;
+  try{lyr.scrollTo({top:top,behavior:"smooth"})}catch(e){lyr.scrollTop=top}
+}
+function tick(){
+  var t=au.currentTime,a=activeAt(t);paint(a.idx,a.on);
+  var d=total();cur.textContent=fmt(t);dur.textContent=fmt(d);
+  var v=Math.min(1000,Math.round(t/d*1000));
+  if(!seeking){seek.value=v;seek.style.setProperty("--p",(v/10)+"%")}
+}
+function loop(){tick();if(!au.paused&&!au.ended)raf=requestAnimationFrame(loop)}
+var seeking=false;
+seek.addEventListener("input",function(){seeking=true;var t=seek.value/1000*total();cur.textContent=fmt(t);seek.style.setProperty("--p",(seek.value/10)+"%");var a=activeAt(t);paint(a.idx,a.on)});
+seek.addEventListener("change",function(){seeking=false;seekTo(seek.value/1000*total())});
+function seekTo(t){ensureSrc();try{au.currentTime=Math.max(0,t)}catch(e){};tick()}
+
+/* ---------- playback ---------- */
+var ICO_PLAY='<path d="M7 4.5v15a1 1 0 0 0 1.5.9l12-7.5a1 1 0 0 0 0-1.8l-12-7.5A1 1 0 0 0 7 4.5z"/>';
+var ICO_PAUSE='<rect x="6" y="4.5" width="4.4" height="15" rx="1.4"/><rect x="13.6" y="4.5" width="4.4" height="15" rx="1.4"/>';
+function setIcon(p){$("ico").innerHTML=p?ICO_PAUSE:ICO_PLAY;playBtn.setAttribute("aria-label",p?"暫停":"播放")}
+function ensureSrc(){if(loaded!==ver){au.src=SRC[ver];loaded=ver}}
+function play(){ensureSrc();var p=au.play();if(p&&p.catch)p.catch(function(){setIcon(false)})}
+playBtn.addEventListener("click",function(){if(au.paused)play();else au.pause()});
+au.addEventListener("play",function(){setIcon(true);cancelAnimationFrame(raf);loop()});
+au.addEventListener("playing",function(){setIcon(true)});
+au.addEventListener("pause",function(){setIcon(false);tick()});
+au.addEventListener("ended",function(){setIcon(false);lastIdx=-2;tick();paint(-1,false)});
+au.addEventListener("timeupdate",function(){if(au.paused)tick()});
+au.addEventListener("seeked",tick);
+au.addEventListener("loadedmetadata",tick);
+au.addEventListener("error",function(){setIcon(false)});
+
+/* ---------- version toggle ---------- */
+var btns=document.querySelectorAll(".toggle button");
+Array.prototype.forEach.call(btns,function(b){b.addEventListener("click",function(){
+  var v=b.getAttribute("data-v");if(v===ver)return;
+  var was=!au.paused;au.pause();ver=v;
+  Array.prototype.forEach.call(btns,function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});
+  lastIdx=-2;lastOn=null;pauseScrollUntil=0;lyr.scrollTop=0;
+  if(opened){au.src=SRC[ver];loaded=ver;try{au.currentTime=0}catch(e){}}
+  seek.value=0;seek.style.setProperty("--p","0%");cur.textContent="0:00";dur.textContent=fmt(DUR[ver]);paint(-1,false);
+  if(opened&&was)play();
+})});
+dur.textContent=fmt(DUR[ver]);
+
+/* ---------- cover: unwrap ---------- */
+var cover=$("cover"),gift=$("gift");
+var PT_STAR="data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z" fill="#F4C95D"/></svg>');
+var PT_HEART="data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21C5 15 2 11.500 2 8a5 5 0 0 1 10-1 5 5 0 0 1 10 1c0 3.500-3 7-10 13z" fill="#F4A096"/></svg>');
+var PT_HEART2="data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21C5 15 2 11.500 2 8a5 5 0 0 1 10-1 5 5 0 0 1 10 1c0 3.500-3 7-10 13z" fill="#F8D48A"/></svg>');
+function confetti(){
+  var r=gift.getBoundingClientRect(),ox=r.left+r.width/2,oy=r.top+r.height*0.46;
+  var imgs=[PT_STAR,PT_HEART,PT_STAR,PT_HEART2];
+  for(var i=0;i<34;i++){
+    var s=document.createElement("div");s.className="pt";
+    var sz=12+Math.random()*16;s.style.width=s.style.height=sz+"px";s.style.backgroundImage="url('"+imgs[i%imgs.length]+"')";
+    s.style.left=(ox-sz/2)+"px";s.style.top=(oy-sz/2)+"px";cover.appendChild(s);
+    var ang=-Math.PI*(0.08+Math.random()*0.84),sp=140+Math.random()*260;
+    var dx=Math.cos(ang)*sp,dy=Math.sin(ang)*sp;
+    if(s.animate){
+      var an=s.animate([{transform:"translate(0,0) scale(.3) rotate(0)",opacity:0},{transform:"translate("+dx*0.6+"px,"+dy*0.6+"px) scale(1) rotate("+(Math.random()*120-60)+"deg)",opacity:1,offset:.35},{transform:"translate("+dx+"px,"+(dy+180)+"px) scale(.8) rotate("+(Math.random()*240-120)+"deg)",opacity:0}],{duration:1500+Math.random()*900,delay:Math.random()*250,easing:"cubic-bezier(.2,.7,.4,1)",fill:"forwards"});
+      an.onfinish=(function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el)}})(s);
+    }else{setTimeout((function(el){return function(){if(el.parentNode)el.parentNode.removeChild(el)}})(s),1500)}
+  }
+}
+function openGift(){
+  if(opened)return;opened=true;
+  /* user gesture: unlock + start audio right here */
+  ensureSrc();var p=au.play();if(p&&p.catch)p.catch(function(){setIcon(false)});
+  cover.classList.add("opening");gift.classList.add("open");
+  setTimeout(confetti,600);
+  var wait=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches?300:2900;
+  setTimeout(function(){
+    cover.classList.add("done");$("app").classList.add("show");$("app").removeAttribute("aria-hidden");document.body.classList.remove("locked");
+    setTimeout(function(){cover.style.display="none"},1000);
+  },wait);
+}
+cover.addEventListener("click",openGift);
+cover.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();openGift()}});
+
+/* ---------- album ---------- */
+var PH=[];for(var i=1;i<=10;i++){var n=("0"+i).slice(-2);PH.push({t:"thumb"+n+".jpg",f:"photo"+n+".jpg",a:"相簿照片 "+i})}
+var grid=$("grid"),RATIO=[1.776,1.776,1.777,1.777,1.777,1.777,.5626,1.777,1.777,1.776];
+var cols=[document.createElement("div"),document.createElement("div")],hs=[0,0];
+cols.forEach(function(c){c.className="col";grid.appendChild(c)});
+PH.forEach(function(p,i){
+  var b=document.createElement("button");b.type="button";b.className="ph";b.setAttribute("aria-label","放大照片 "+(i+1));
+  var im=document.createElement("img");im.src=p.t;im.alt=p.a;im.loading="lazy";im.decoding="async";im.width=560;im.height=Math.round(560*RATIO[i]);b.appendChild(im);
+  b.addEventListener("click",function(){openLB(i)});
+  var k=hs[0]<=hs[1]?0:1;cols[k].appendChild(b);hs[k]+=RATIO[i]+0.12;
+});
+var lb=$("lb"),lbimg=$("lbimg"),lbct=$("lbct"),li=0;
+function showLB(){var p=PH[li];lbimg.style.opacity=0;lbimg.onload=function(){lbimg.style.opacity=1};lbimg.src=p.f;lbimg.alt=p.a;lbct.textContent=(li+1)+" / "+PH.length;
+  [li-1,li+1].forEach(function(k){if(k>=0&&k<PH.length){var x=new Image();x.src=PH[k].f}})}
+function openLB(i){li=i;showLB();lb.classList.add("show");document.body.classList.add("locked")}
+function closeLB(){lb.classList.remove("show");document.body.classList.remove("locked")}
+function step(d){li=(li+d+PH.length)%PH.length;showLB()}
+lb.querySelector(".x").addEventListener("click",closeLB);
+lb.querySelector(".pv").addEventListener("click",function(){step(-1)});
+lb.querySelector(".nx").addEventListener("click",function(){step(1)});
+lb.addEventListener("click",function(e){if(e.target===lb)closeLB()});
+document.addEventListener("keydown",function(e){if(!lb.classList.contains("show"))return;if(e.key==="Escape")closeLB();if(e.key==="ArrowLeft")step(-1);if(e.key==="ArrowRight")step(1)});
+var sx=0,sy=0;
+lb.addEventListener("touchstart",function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+lb.addEventListener("touchend",function(e){var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.4)step(dx<0?1:-1);else if(dy>90&&Math.abs(dy)>Math.abs(dx)*1.5)closeLB()},{passive:true});
+
+$("more").addEventListener("click",function(){$("msg").scrollIntoView({behavior:"smooth",block:"start"})});
+
+/* test hook (harmless): lets a local test read the sync state */
+window.__song={get ver(){return ver},get idx(){return lastIdx},get on(){return lastOn},audio:au};
+})();
+</script>
+</body>
+</html>
